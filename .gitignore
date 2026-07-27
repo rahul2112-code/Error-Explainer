@@ -1,0 +1,17 @@
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+# Compiled files
+*.exe
+*.out
+*.class
+output
+a.out
+user_prog
+user_code.c
+Main.java
+
+# Environment files
+.env

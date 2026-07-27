@@ -1,0 +1,202 @@
+{
+  "patterns": [
+    {
+      "regex": "';' expected",
+      "type": "syntax_error",
+      "explanation": "You forgot a semicolon ';' at the end of a statement. In Java, every statement must end with a semicolon — just like a period ends a sentence. Check the line shown above and add ';' at the end.",
+      "confidence": 0.95
+    },
+    {
+      "regex": "cannot find symbol.*variable\\s+([a-zA-Z0-9_]+)",
+      "type": "undeclared_variable",
+      "explanation": "Java doesn't know what the variable '{}' is. You either:\n  1. Forgot to declare it first (e.g., 'int {} = 0;')\n  2. Misspelled its name (Java is case-sensitive!)\n  3. Used it outside its scope (e.g., declared inside an if-block but used outside)",
+      "confidence": 0.92
+    },
+    {
+      "regex": "cannot find symbol.*class\\s+([a-zA-Z0-9_]+)",
+      "type": "undefined_class",
+      "explanation": "Java doesn't recognize the class '{}'. You might need to:\n  1. Import it at the top: e.g., 'import java.util.Scanner;'\n  2. Check for a spelling mistake (Java is case-sensitive)\n  3. Make sure you created the class in the same project",
+      "confidence": 0.90
+    },
+    {
+      "regex": "cannot find symbol.*method\\s+([a-zA-Z0-9_]+)\\(([^)]*)\\)",
+      "type": "undefined_method",
+      "explanation": "The method '{}({})' doesn't exist or wasn't found. Check:\n  1. Spelling of the method name\n  2. Are you passing the right types of arguments?\n  3. Is the method defined in the correct class?",
+      "confidence": 0.88
+    },
+    {
+      "regex": "cannot find symbol",
+      "type": "undefined_symbol",
+      "explanation": "Java encountered a name (variable, method, or class) it doesn't recognize. Check the line shown for any spelling mistakes, or make sure you declared/imported the thing you're trying to use.",
+      "confidence": 0.80
+    },
+    {
+      "regex": "missing return statement",
+      "type": "missing_return",
+      "explanation": "This method says it will return a value (its return type is not 'void'), but there's no 'return' statement at the end of every possible code path. Add 'return <value>;' at the end of the method, or make sure every if/else branch has a return.",
+      "confidence": 0.95
+    },
+    {
+      "regex": "incompatible types[:\\s]+(.+?) cannot be converted to (.+)",
+      "type": "type_mismatch",
+      "explanation": "Type mismatch! You're trying to put a '{}' where a '{}' is expected. For example, you cannot store a decimal number (double) into a whole-number variable (int) without converting it first. Use casting, like: (int) myValue.",
+      "confidence": 0.92
+    },
+    {
+      "regex": "incompatible types",
+      "type": "type_mismatch",
+      "explanation": "You have a type mismatch. The value on one side doesn't match the type on the other side. Check that your variable types match what you're assigning or passing to them.",
+      "confidence": 0.80
+    },
+    {
+      "regex": "reached end of file while parsing",
+      "type": "syntax_error",
+      "explanation": "Java reached the end of your file but was still expecting more code. This almost always means you opened a curly brace '{' or parenthesis '(' somewhere but never closed it with '}' or ')'. Count your opening and closing braces — they must match!",
+      "confidence": 0.95
+    },
+    {
+      "regex": "variable ([a-zA-Z0-9_]+) might not have been initialized",
+      "type": "uninitialized_variable",
+      "explanation": "You're trying to use the variable '{}' before giving it a value. Java doesn't allow reading a variable that might not have been set yet. Give it a starting value when you declare it, like: 'int {} = 0;'",
+      "confidence": 0.95
+    },
+    {
+      "regex": "unreachable statement",
+      "type": "unreachable_code",
+      "explanation": "There is code here that can never be executed. This usually happens because you placed code after a 'return' statement. Move the 'return' to the end of your method, or remove the unreachable lines.",
+      "confidence": 0.95
+    },
+    {
+      "regex": "([a-zA-Z0-9_]+) is already defined in",
+      "type": "duplicate_definition",
+      "explanation": "You declared the name '{}' twice in the same scope. You can't have two variables or methods with the same name in the same area of code. Remove or rename the duplicate.",
+      "confidence": 0.95
+    },
+    {
+      "regex": "illegal start of expression",
+      "type": "syntax_error",
+      "explanation": "Java doesn't understand the start of this line. Common causes:\n  1. An extra or misplaced closing brace '}' above\n  2. A keyword used in the wrong place\n  3. Missing operator between two values\nLook at the lines just above the error for a stray brace.",
+      "confidence": 0.80
+    },
+    {
+      "regex": "method (.+?) in class (.+?) cannot be applied to given types",
+      "type": "argument_mismatch",
+      "explanation": "You're calling the method '{}' from class '{}', but you're giving it the wrong number or types of arguments. Check the method's definition to see exactly what it expects.",
+      "confidence": 0.88
+    },
+    {
+      "regex": "class ([a-zA-Z0-9_]+) is public, should be declared in a file named",
+      "type": "filename_mismatch",
+      "explanation": "In Java, a public class named '{}' MUST be in a file named '{}.java'. Your filename and class name must match exactly (including capital letters). Rename your file or rename your class.",
+      "confidence": 0.98
+    },
+    {
+      "regex": "not a statement",
+      "type": "syntax_error",
+      "explanation": "This line is not a valid Java statement. You might have:\n  1. Written an expression that doesn't do anything (like just '5 + 3;')\n  2. Forgotten an assignment operator '='\n  3. Made a typo that broke the statement structure",
+      "confidence": 0.85
+    },
+    {
+      "regex": "'.class' expected",
+      "type": "syntax_error",
+      "explanation": "Java found a type name used in an unusual way. This often happens when you try to use an array type incorrectly, for example writing 'int[]' where just 'int' is expected, or vice versa.",
+      "confidence": 0.75
+    },
+    {
+      "regex": "illegal character: (.+)",
+      "type": "syntax_error",
+      "explanation": "There is an unexpected character '{}' in your code that Java doesn't understand. You might have accidentally pasted a special character, or used the wrong type of quote marks (use \" for strings, not ' ').",
+      "confidence": 0.90
+    },
+    {
+      "regex": "unclosed string literal",
+      "type": "syntax_error",
+      "explanation": "You started a String with a quote '\"' but never closed it with a matching '\"'. Make sure every opening double-quote has a closing double-quote on the same line.",
+      "confidence": 0.97
+    },
+    {
+      "regex": "int cannot be dereferenced",
+      "type": "type_error",
+      "explanation": "You're trying to use a dot '.' to call a method on a plain 'int' number, but only objects have methods. If you need to use methods, wrap it in an Integer object: 'Integer.toString(myInt)' instead of 'myInt.toString()'.",
+      "confidence": 0.92
+    },
+    {
+      "regex": "package ([a-zA-Z0-9_.]+) does not exist",
+      "type": "import_error",
+      "explanation": "The package '{}' doesn't exist or wasn't found. Check:\n  1. Is the package name spelled correctly?\n  2. Do you have the required library in your project?\n  3. For standard Java libraries, make sure you use the correct full name (e.g., 'java.util.ArrayList')",
+      "confidence": 0.93
+    },
+    {
+      "regex": "cannot be applied to \\((.+?)\\)",
+      "type": "argument_mismatch",
+      "explanation": "The arguments you provided ({}) don't match what this method expects. Check the method signature to see what types and how many arguments it needs.",
+      "confidence": 0.82
+    },
+    {
+      "regex": "possible loss of precision",
+      "type": "type_mismatch",
+      "explanation": "You're trying to assign a bigger type (like double or long) into a smaller type (like int or float) without explicitly converting it. Use a cast to tell Java you're aware of the precision loss, like: 'int x = (int) myDouble;'",
+      "confidence": 0.90
+    },
+    {
+      "regex": "non-static method ([a-zA-Z0-9_]+) cannot be referenced from a static context",
+      "type": "static_context_error",
+      "explanation": "The method '{}' belongs to an object (it's not static), but you're trying to call it directly from a static method (like 'main'). You must first create an object of the class, then call the method on it:\n  MyClass obj = new MyClass();\n  obj.{}();",
+      "confidence": 0.95
+    },
+    {
+      "regex": "non-static variable ([a-zA-Z0-9_]+) cannot be referenced from a static context",
+      "type": "static_context_error",
+      "explanation": "The variable '{}' belongs to an object (it's not static), but you're trying to use it from a static method (like 'main'). Either make the variable 'static', or create an object of the class first:\n  MyClass obj = new MyClass();\n  System.out.println(obj.{});",
+      "confidence": 0.95
+    },
+    {
+      "regex": "array required, but (.+) found",
+      "type": "array_error",
+      "explanation": "You're using square brackets '[]' on a '{}' variable, but only arrays can be accessed with brackets. Check if your variable is actually declared as an array.",
+      "confidence": 0.90
+    },
+    {
+      "regex": "operator (.+?) cannot be applied to (.+?),\\s*(.+)",
+      "type": "operator_error",
+      "explanation": "The operator '{}' cannot be used between '{}' and '{}'. For example, you can't use '+' to add an int and a boolean. Check that both sides of your operator are compatible types.",
+      "confidence": 0.85
+    },
+    {
+      "regex": "break outside switch or loop",
+      "type": "control_flow_error",
+      "explanation": "'break' can only be used inside a loop (for, while, do-while) or a switch statement. It looks like your 'break' is not inside any of these structures.",
+      "confidence": 0.95
+    },
+    {
+      "regex": "continue outside of loop",
+      "type": "control_flow_error",
+      "explanation": "'continue' can only be used inside a loop (for, while, do-while). It looks like your 'continue' statement is not inside a loop.",
+      "confidence": 0.95
+    },
+    {
+      "regex": "duplicate case label",
+      "type": "syntax_error",
+      "explanation": "You have two 'case' statements with the same value in a switch block. Each case value must be unique. Remove or change one of the duplicate cases.",
+      "confidence": 0.95
+    },
+    {
+      "regex": "void type not allowed here",
+      "type": "type_error",
+      "explanation": "You're trying to use the return value of a void method (a method that returns nothing) in an expression or assignment. Void methods cannot return a value — you can only call them as standalone statements.",
+      "confidence": 0.90
+    },
+    {
+      "regex": "throws clause required for",
+      "type": "exception_error",
+      "explanation": "This method performs an operation that can throw a checked exception, but you haven't handled it. You must either:\n  1. Wrap the code in a try-catch block, or\n  2. Add 'throws ExceptionType' to the method signature",
+      "confidence": 0.88
+    },
+    {
+      "regex": "unreported exception (.+?);",
+      "type": "exception_error",
+      "explanation": "The exception '{}' might be thrown but is never caught or declared. You must either:\n  1. Wrap the risky code in a try-catch block:\n     try { ... } catch ({} e) { ... }\n  2. Or declare the exception in the method: 'public void myMethod() throws {}'",
+      "confidence": 0.92
+    }
+  ]
+}

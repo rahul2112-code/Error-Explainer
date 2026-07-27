@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friendly Compiler — Learn C &amp; Java</title>
+    <meta name="description" content="A beginner-friendly C and Java compiler that explains errors in plain English. Perfect for students learning to code.">
+
+    <!-- CodeMirror -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/darcula.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="app-container">
+
+        <!-- ===== SIDEBAR ===== -->
+        <aside class="sidebar" role="navigation" aria-label="Language selector">
+            <div class="sidebar-logo">
+                <svg viewBox="0 0 28 28" width="28" height="28" fill="none">
+                    <rect width="28" height="28" rx="8" fill="var(--btn-primary)"/>
+                    <path d="M8 10l-4 4 4 4M20 10l4 4-4 4M15 7l-2 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <div class="sidebar-lang-group">
+                <button class="sidebar-icon active" data-lang="c" id="lang-c" aria-label="Switch to C compiler" title="C Compiler">
+                    <span class="lang-letter">C</span>
+                </button>
+                <button class="sidebar-icon" data-lang="java" id="lang-java" aria-label="Switch to Java compiler" title="Java Compiler">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M8.851 18.56s-.917.534.653.714c1.902.218 2.874.187 4.969-.211 0 0 .552.346 1.321.646-4.699 2.013-10.633-.118-6.943-1.149M8.276 15.933s-1.028.761.542.924c2.032.209 3.636.227 6.413-.308 0 0 .384.389.987.602-5.679 1.661-12.007.13-7.942-1.218M13.116 11.475c1.158 1.333-.304 2.533-.304 2.533s2.939-1.518 1.589-3.418c-1.261-1.772-2.228-2.652 3.007-5.688 0-.001-8.216 2.051-4.292 6.573M19.33 20.504s.679.559-.747.991c-2.712.822-11.288 1.070-13.669.033-.856-.373.75-.890 1.254-.998.527-.114.828-.093.828-.093-.953-.671-6.156 1.317-2.643 1.887 9.58 1.553 17.462-.7 14.977-1.820M9.292 13.21s-4.362 1.036-1.544 1.412c1.189.159 3.561.123 5.77-.062 1.806-.152 3.618-.477 3.618-.477s-.637.272-1.098.587c-4.429 1.165-12.986.623-10.522-.568 2.082-1.006 3.776-.892 3.776-.892M17.116 17.584c4.503-2.34 2.421-4.589.968-4.285-.355.074-.515.138-.515.138s.132-.207.385-.297c2.875-1.010 5.086 2.981-.928 4.562 0-.001.07-.062.09-.118M14.401 0s2.494 2.494-2.366 6.33c-3.896 3.077-.888 4.832-.001 6.836-2.274-2.053-3.943-3.858-2.824-5.539 1.644-2.469 6.197-3.665 5.191-7.627M9.734 23.924c4.322.277 10.959-.153 11.116-2.198 0 0-.302.775-3.572 1.391-3.688.694-8.239.613-10.937.168 0-.001.553.457 3.393.639"/></svg>
+                </button>
+            </div>
+
+            <div class="sidebar-bottom">
+                <button class="sidebar-icon theme-toggle" id="theme-btn" aria-label="Toggle dark/light theme" title="Toggle Theme">
+                    <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.884 5.116a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 001.061 1.061l1.59-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.293 18.884a.75.75 0 001.06-1.06l-1.59-1.59a.75.75 0 10-1.061 1.06l1.591 1.59zM12 18.75a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-1.5a.75.75 0 01.75-.75zM5.116 18.884a.75.75 0 00-1.06 1.06l1.59 1.591a.75.75 0 101.061-1.061l-1.591-1.59zM2.25 12a.75.75 0 01.75-.75h2.25a.75.75 0 010 1.5H3a.75.75 0 01-.75-.75zM6.707 5.116a.75.75 0 00-1.06 1.06l1.591 1.591a.75.75 0 101.06-1.06l-1.59-1.591z"/></svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="display:none"><path d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"/></svg>
+                </button>
+            </div>
+        </aside>
+
+        <!-- ===== MAIN CONTENT ===== -->
+        <div class="main-wrapper">
+
+            <!-- Header -->
+            <header class="top-nav">
+                <div class="logo">
+                    <div class="logo-text">
+                        <h1 class="title">Friendly Compiler</h1>
+                        <span class="subtitle" id="lang-subtitle">C Language</span>
+                    </div>
+                </div>
+
+                <div class="lang-badge-row">
+                    <div class="lang-badge" id="lang-badge">
+                        <span class="badge-dot"></span>
+                        <span id="badge-text">C Compiler</span>
+                    </div>
+                </div>
+
+                <div class="nav-actions">
+                    <button class="action-btn clear-btn" id="clear-btn" aria-label="Clear output">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                        Clear
+                    </button>
+                    <button class="action-btn run-btn" id="run-btn" aria-label="Run code">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                        Run
+                    </button>
+                </div>
+            </header>
+
+            <!-- Workspace -->
+            <div class="workspace">
+
+                <!-- LEFT: Editor Pane -->
+                <div class="pane editor-pane">
+                    <div class="pane-header">
+                        <div class="tab-group">
+                            <div class="tab active" id="file-name-tab">
+                                <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor" style="margin-right:5px"><path d="M4 1h5l3 3v10a1 1 0 01-1 1H4a1 1 0 01-1-1V2a1 1 0 011-1zm4.5 0v3H12"/></svg>
+                                main.c
+                            </div>
+                        </div>
+                        <div class="editor-toolbar">
+                            <button class="toolbar-btn" id="reset-btn" title="Reset to sample code">Reset</button>
+                        </div>
+                    </div>
+                    <div class="editor-container">
+                        <textarea id="code-editor"></textarea>
+                    </div>
+
+                    <!-- Beginner tips panel -->
+                    <div class="tips-panel" id="tips-panel">
+                        <div class="tips-header">
+                            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2a7 7 0 015.317 11.559C16.45 14.573 16 15.745 16 17h-8c0-1.255-.45-2.427-1.317-3.441A7 7 0 0112 2zm2 16v1a2 2 0 01-4 0v-1h4z"/></svg>
+                            Quick Tips
+                        </div>
+                        <ul class="tips-list" id="tips-list">
+                            <li>Every C statement ends with a <code>;</code></li>
+                            <li>Declare variables before using them: <code>int x = 5;</code></li>
+                            <li>Include headers for built-in functions: <code>#include &lt;stdio.h&gt;</code></li>
+                            <li>Match every <code>{</code> with a closing <code>}</code></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- RIGHT: Output Pane -->
+                <div class="pane output-pane">
+                    <div class="pane-header">
+                        <div class="tab-group">
+                            <div class="tab active">
+                                <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" style="margin-right:5px"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-2 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-2h11v2zm5 0h-4v-2h4v2zM4 12V8h7v4H4zm8 0V8h7v4h-7z"/></svg>
+                                Output
+                            </div>
+                        </div>
+                        <div class="output-status" id="output-status"></div>
+                    </div>
+
+                    <!-- Welcome / loading / result states -->
+                    <div class="output-container" id="output-container">
+                        <div class="welcome-screen" id="welcome-screen">
+                            <div class="welcome-icon">
+                                <svg viewBox="0 0 64 64" width="56" height="56" fill="none">
+                                    <circle cx="32" cy="32" r="30" stroke="var(--btn-primary)" stroke-width="2" opacity="0.3"/>
+                                    <path d="M22 20l-8 12 8 12M42 20l8 12-8 12M36 16l-8 32" stroke="var(--btn-primary)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <h2 class="welcome-title">Ready to compile!</h2>
+                            <p class="welcome-desc">Write your code in the editor and click <strong>Run</strong> to compile. Errors will be explained in plain English so you know exactly how to fix them.</p>
+                            <div class="welcome-features">
+                                <div class="feature-chip">
+                                    <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor"><path d="M8 0a8 8 0 100 16A8 8 0 008 0zm.5 11.5h-1v-5h1v5zm0-6.5h-1V4h1v1z"/></svg>
+                                    Plain English errors
+                                </div>
+                                <div class="feature-chip">
+                                    <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1H3a1 1 0 01-1-1v-2zm5-4a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1H8a1 1 0 01-1-1V7zm5-5a1 1 0 011-1h2a1 1 0 011 1v11a1 1 0 01-1 1h-2a1 1 0 01-1-1V2z"/></svg>
+                                    Confidence scores
+                                </div>
+                                <div class="feature-chip">
+                                    <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor"><path d="M8 16A8 8 0 108 0a8 8 0 000 16zm.93-9.412l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 100-2 1 1 0 000 2z"/></svg>
+                                    C &amp; Java support
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rendered output goes here -->
+                        <div class="output-rendered" id="output-rendered" style="display:none"></div>
+                    </div>
+                </div>
+
+            </div><!-- end workspace -->
+        </div><!-- end main-wrapper -->
+    </div><!-- end app-container -->
+
+    <!-- CodeMirror JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/clike/clike.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

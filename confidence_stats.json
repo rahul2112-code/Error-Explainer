@@ -1,0 +1,44 @@
+{
+  "pattern_025": {
+    "total_uses": 2,
+    "helpful_count": 0,
+    "not_helpful_count": 0,
+    "created_at": "2026-03-30T14:23:30.018253",
+    "last_used": "2026-04-13T09:12:20.582735"
+  },
+  "pattern_000": {
+    "total_uses": 23,
+    "helpful_count": 0,
+    "not_helpful_count": 0,
+    "created_at": "2026-04-13T09:11:03.162004",
+    "last_used": "2026-05-08T10:09:29.850435"
+  },
+  "pattern_005": {
+    "total_uses": 17,
+    "helpful_count": 0,
+    "not_helpful_count": 0,
+    "created_at": "2026-04-13T09:11:03.163793",
+    "last_used": "2026-05-08T10:09:29.851983"
+  },
+  "pattern_004": {
+    "total_uses": 20,
+    "helpful_count": 0,
+    "not_helpful_count": 0,
+    "created_at": "2026-04-13T09:11:03.165304",
+    "last_used": "2026-05-08T10:09:29.853117"
+  },
+  "pattern_024": {
+    "total_uses": 19,
+    "helpful_count": 0,
+    "not_helpful_count": 0,
+    "created_at": "2026-04-13T09:11:03.167122",
+    "last_used": "2026-05-08T10:09:29.855571"
+  },
+  "pattern_011": {
+    "total_uses": 17,
+    "helpful_count": 0,
+    "not_helpful_count": 0,
+    "created_at": "2026-04-13T09:11:03.168701",
+    "last_used": "2026-05-08T10:09:29.856339"
+  }
+}

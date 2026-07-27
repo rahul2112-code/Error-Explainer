@@ -1,0 +1,196 @@
+{
+  "patterns": [
+    {
+      "regex": "expected.*[;,].*before",
+      "type": "syntax_error",
+      "explanation": "You're missing a semicolon (;) or comma (,). Every statement in C must end with a semicolon. If you're declaring multiple variables, separate them with commas. Check the line just above where the error occurred.",
+      "confidence": 0.95
+    },
+    {
+      "regex": "expected ['\"]?\\)['\"]? before",
+      "type": "syntax_error",
+      "explanation": "You're missing a closing parenthesis ')'. Make sure all opening parentheses have matching closing ones.",
+      "confidence": 0.95
+    },
+    {
+      "regex": "expected ['\"]?\\}['\"]? at end of input",
+      "type": "syntax_error",
+      "explanation": "You're missing a closing brace '}' somewhere in your code. Count your opening '{' and closing '}' braces - they should match!",
+      "confidence": 0.95
+    },
+    {
+      "regex": "expected declaration specifiers before",
+      "type": "syntax_error",
+      "explanation": "You need to specify the data type (like int, float, char) for your variable. In C, every variable must have a type declaration.",
+      "confidence": 0.90
+    },
+    {
+      "regex": "['\"]?(.+?)['\"]? undeclared \\(first use in this function\\)",
+      "type": "undeclared_identifier",
+      "explanation": "You're using '{}' without declaring it first. Either you forgot to declare this variable, misspelled it, or forgot to include the necessary header file.",
+      "confidence": 0.95
+    },
+    {
+      "regex": "implicit declaration of function ['\"]?(.+?)['\"]?",
+      "type": "undeclared_function",
+      "explanation": "You're calling function '{}' but haven't declared it. If it's a standard library function (like printf, scanf), include the appropriate header file (#include <stdio.h>). If it's your own function, declare it before using it.",
+      "confidence": 0.95
+    },
+    {
+      "regex": "conflicting types for ['\"]?(.+?)['\"]?",
+      "type": "type_error",
+      "explanation": "You've declared '{}' with different types in different places. Make sure all declarations of this function or variable use the same type throughout your program.",
+      "confidence": 0.90
+    },
+    {
+      "regex": "redefinition of ['\"]?(.+?)['\"]?",
+      "type": "redefinition_error",
+      "explanation": "You've defined '{}' more than once. Each function or variable can only be defined once in the same scope. Remove the duplicate definition.",
+      "confidence": 0.95
+    },
+    {
+      "regex": "redeclaration of ['\"]?(.+?)['\"]? with no linkage",
+      "type": "redefinition_error",
+      "explanation": "You're trying to declare '{}' again in the same scope. Once a variable is declared, you can't declare it again - you can only use it or assign new values to it.",
+      "confidence": 0.90
+    },
+    {
+      "regex": "too few arguments to function ['\"]?(.+?)['\"]?",
+      "type": "function_call_error",
+      "explanation": "You're calling function '{}' without enough arguments. Check the function definition to see how many parameters it needs and provide them all.",
+      "confidence": 0.95
+    },
+    {
+      "regex": "too many arguments to function ['\"]?(.+?)['\"]?",
+      "type": "function_call_error",
+      "explanation": "You're passing too many arguments to function '{}'. Check the function definition to see exactly how many parameters it expects.",
+      "confidence": 0.95
+    },
+    {
+      "regex": "control reaches end of non-void function",
+      "type": "return_error",
+      "explanation": "Your function should return a value, but there's a path through the code where it doesn't. Add a return statement at the end of your function.",
+      "confidence": 0.90
+    },
+    {
+      "regex": "return-statement with no value, in function returning",
+      "type": "return_error",
+      "explanation": "Your function should return a value, but you used 'return;' without a value. Change it to 'return <value>;' with an appropriate value.",
+      "confidence": 0.95
+    },
+    {
+      "regex": "void value not ignored as it ought to be",
+      "type": "type_error",
+      "explanation": "You're trying to use the return value of a function that doesn't return anything (void function). Void functions can't be used in expressions or assignments.",
+      "confidence": 0.90
+    },
+    {
+      "regex": "assignment (makes pointer )?from incompatible pointer type",
+      "type": "type_error",
+      "explanation": "You're trying to assign a pointer of one type to a pointer of a different type. Make sure both sides of the assignment have matching pointer types, or use proper type casting.",
+      "confidence": 0.85
+    },
+    {
+      "regex": "subscripted value is not an array, pointer, or vector",
+      "type": "array_error",
+      "explanation": "You're trying to use array notation [] on something that isn't an array or pointer. Check that you're using the correct variable and that it's actually declared as an array.",
+      "confidence": 0.90
+    },
+    {
+      "regex": "array subscript is not an integer",
+      "type": "array_error",
+      "explanation": "Array indices must be integers. You're trying to access an array element using a non-integer value (like a float or char). Convert it to an integer first.",
+      "confidence": 0.90
+    },
+    {
+      "regex": "expected expression before",
+      "type": "syntax_error",
+      "explanation": "The compiler expected an expression but found something else instead. This often happens when you have mismatched parentheses or forget to put a value in an expression.",
+      "confidence": 0.85
+    },
+    {
+      "regex": "stray ['\"]?(.+?)['\"]? in program",
+      "type": "syntax_error",
+      "explanation": "There's an unexpected character '{}' in your code. This might be a special character that accidentally got inserted, or you might be using the wrong type of quote marks.",
+      "confidence": 0.90
+    },
+    {
+      "regex": "unknown type name ['\"]?(.+?)['\"]?",
+      "type": "type_error",
+      "explanation": "The compiler doesn't recognize the type '{}'. Either you misspelled it, forgot to define it (for custom types), or need to include a header file that defines it.",
+      "confidence": 0.90
+    },
+    {
+      "regex": "storage size of ['\"]?(.+?)['\"]? isn'?t known",
+      "type": "type_error",
+      "explanation": "The compiler can't determine how much memory to allocate for '{}'. This usually happens with incomplete type definitions or missing header files.",
+      "confidence": 0.85
+    },
+    {
+      "regex": "incompatible type for argument (\\d+) of ['\"]?(.+?)['\"]?",
+      "type": "function_call_error",
+      "explanation": "Argument {} of function '{}' has the wrong type. Check what type the function expects and make sure you're passing the correct type of value.",
+      "confidence": 0.90
+    },
+    {
+      "regex": "lvalue required as left operand of assignment",
+      "type": "assignment_error",
+      "explanation": "You can only assign values to variables, not to expressions or constants. The left side of '=' must be a variable or memory location that can be modified.",
+      "confidence": 0.90
+    },
+    {
+      "regex": "initialization (makes pointer )?from incompatible pointer type",
+      "type": "type_error",
+      "explanation": "You're initializing a pointer with another pointer of an incompatible type. Make sure the pointer types match, or use proper casting if necessary.",
+      "confidence": 0.85
+    },
+    {
+      "regex": "unused variable ['\"]?(.+?)['\"]?",
+      "type": "warning_unused",
+      "explanation": "You declared variable '{}' but never used it. This is just a warning - your code will still compile. Consider removing unused variables to keep your code clean.",
+      "confidence": 0.95
+    },
+    {
+      "regex": "format ['\"]?(.+?)['\"]? expects argument of type ['\"]?(.+?)['\"]?, but argument (\\d+) has type",
+      "type": "format_error",
+      "explanation": "In your printf/scanf, the format specifier '{}' expects type '{}', but you're passing a different type in position {}. Use the correct format specifier for your data type (e.g., %d for int, %f for float, %c for char).",
+      "confidence": 0.95
+    },
+    {
+      "regex": "passing argument (\\d+) of ['\"]?(.+?)['\"]? makes pointer from integer without a cast",
+      "type": "type_error",
+      "explanation": "In argument {} of function '{}', you're passing an integer where a pointer is expected. You might have forgotten the '&' operator to get the address of a variable.",
+      "confidence": 0.90
+    },
+    {
+      "regex": "passing argument (\\d+) of ['\"]?(.+?)['\"]? makes integer from pointer without a cast",
+      "type": "type_error",
+      "explanation": "In argument {} of function '{}', you're passing a pointer where an integer is expected. You might need to dereference the pointer using the '*' operator.",
+      "confidence": 0.90
+    },
+    {
+      "regex": "expected identifier or ['\"]?\\(['\"]? before",
+      "type": "syntax_error",
+      "explanation": "The compiler expected a variable name or opening parenthesis but found something else. Check your function declarations and variable names for syntax errors.",
+      "confidence": 0.85
+    },
+    {
+      "regex": "break statement not within loop or switch",
+      "type": "control_flow_error",
+      "explanation": "You can only use 'break' inside loops (for, while) or switch statements. It looks like your 'break' is outside of these structures.",
+      "confidence": 0.95
+    },
+    {
+      "regex": "continue statement not within a loop",
+      "type": "control_flow_error",
+      "explanation": "You can only use 'continue' inside loops (for, while, do-while). It looks like your 'continue' is outside of a loop.",
+      "confidence": 0.95
+    },
+    {
+      "regex": "case label not within a switch statement",
+      "type": "control_flow_error",
+      "explanation": "You can only use 'case' labels inside a switch statement. Make sure your case is properly nested within a switch block.",
+      "confidence": 0.95
+    }
+  ]
+}
