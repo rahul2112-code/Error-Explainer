@@ -125,3 +125,25 @@ Contributions are always welcome! If you've found a compiler error that Error Ex
 ## 📄 License
 
 Distributed under the MIT License. Feel free to use, modify, and distribute this project as you see fit.
+
+---
+
+## 👥 Team
+**Department of Computer Science & Engineering**<br>
+**Amrita School of Engineering, Bengaluru**
+
+### Team Members
+1. Akshay Thammana
+2. Santosh Kumar
+3. Ailuri Rahul Reddy
+
+### Faculty Mentor
+**Ms. Neera Chaudhary**
+
+---
+
+## ⭐ Support
+If you found this project interesting, consider giving it a ⭐ **Star** on GitHub.
+It motivates us to continue building better solutions.
+
+*Made with ❤️*
